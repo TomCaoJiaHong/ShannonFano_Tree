@@ -12,4 +12,13 @@ function tree = genTree_Shannon(stringOrFreqs)
         freqs = cellfun(count, syms);
     end
     
+    makeNode = @(c) {c, {}, {}};    % single symbol with empty subtrees
+    nodes = cellfun(makeNode, syms(freqs>0), 'UniformOutput', false)';
+    freqs = freqs(freqs>0)'/sum(freqs);
+
+    [freqs, idx] = sort(freqs, 'descend');     % sort by frequency of occurrence in descend order
+    nodes = nodes(idx);
+
+    tree = ShannonFano(nodes, freqs);
+
 end
