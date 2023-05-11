@@ -11,5 +11,10 @@ function string = decode(code, tree)
         end
     end
 
+    string = [];
+    while ~isempty(code)
+        [sym, code] = dec(code, tree);
+        string = [string sym];
+    end
 
 end
