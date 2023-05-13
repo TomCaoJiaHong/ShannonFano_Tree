@@ -32,5 +32,19 @@ function [] = drawTree(tree, name)
         end
     end
     
+    %after define readtree function, call it and store the root number
+    root = readtree(tree);
+    %set the father of root to 0
+    father(root) = 0;
+    %then plots the tree use treeplot function from matlab
+    figure();
+    %'bo' means node is blue circle, 'r' means line is read
+    treeplot(father(1,1:num),'bo','r');
+    %set the layout
+    [x,y] = treelayout(father(1,1:num));
+    %add the symbol name to the plot
+    text(x,y,string(ttext(1,1:num)));
+    %set title
+    title(name);
     
 end
