@@ -14,7 +14,22 @@ function [] = drawTree(tree, name)
             %if leaf node, increase the node number and return
             num = num+1;
             numout = num;
-        
+        else
+            %if not leaf node, increase the node number then recusive call left
+            %and right childs
+            numleft = readtree(tree{1,2});
+            num = num+1;
+            nummid = num;
+            numright = readtree(tree{1,3});
+            %set left and right child's father to itself
+            father(numleft) = nummid;
+            father(numright) = nummid;
+            numout = nummid;
+            %update ttext array
+            ttext{1,numleft} = tree{1,2}{1,1};
+            ttext{1,nummid} = tree{1,1};
+            ttext{1,numright} = tree{1,3}{1,1};
+        end
     end
     
     
